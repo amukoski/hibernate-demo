@@ -6,9 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CvRepository extends CrudRepository<Cv, Long> {
 
-    @EntityGraph("Cv.CvWithLanguagesEducationsAndProjects")
+    @EntityGraph("Cv.CvWithEducations")
     Iterable<Cv> findAllByIdNotNull();
-
-    @EntityGraph("Cv.CvWithLanguagesEducationsProjectsAndProjectSkills")
-    Iterable<Cv> readAllByIdNotNull();
 }

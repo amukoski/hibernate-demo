@@ -44,9 +44,4 @@ public class _10_EntityGraphs_Subselect {
     void entityGraphFetchFullCv() throws Exception {
         mockMvc.perform(get("/api/cvs"));
     }
-
-    @Test
-    void entityGraphFetchFullCvWithProjectSkillsTogether() throws Exception {
-        mockMvc.perform(get("/api/cvs/full-cv"));
-    }
 }

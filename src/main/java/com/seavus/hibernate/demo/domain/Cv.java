@@ -2,30 +2,16 @@ package com.seavus.hibernate.demo.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @NamedEntityGraph(
-    name = "Cv.CvWithLanguagesEducationsAndProjects",
-    attributeNodes = {
-        @NamedAttributeNode("languages"),
-        @NamedAttributeNode("educations"),
-        @NamedAttributeNode("projects")
-    }
-)
-@NamedEntityGraph(
-    name = "Cv.CvWithLanguagesEducationsProjectsAndProjectSkills",
-    attributeNodes = {
-        @NamedAttributeNode("languages"),
-        @NamedAttributeNode("educations"),
-        @NamedAttributeNode(value = "projects",subgraph = "Project.ProjectWithSkills")
-    },
-    subgraphs = @NamedSubgraph(
-        name = "Project.ProjectWithSkills",
-        attributeNodes = @NamedAttributeNode("skills")
-    )
+    name = "Cv.CvWithEducations",
+    attributeNodes = @NamedAttributeNode("educations")
 )
 @Getter
 @Setter
@@ -36,12 +22,14 @@ public class Cv {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
     public Set<Language> languages = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
     public Set<Education> educations = new HashSet<>();
 
+    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
     public Set<Project> projects = new HashSet<>();
 

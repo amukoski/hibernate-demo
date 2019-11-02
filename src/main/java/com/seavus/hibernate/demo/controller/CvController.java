@@ -18,9 +18,4 @@ public class CvController {
     public Iterable<Cv> findAllCvs() {
         return cvRepository.findAllByIdNotNull();
     }
-
-    @GetMapping("/full-cv")
-    public Iterable<Cv> findCvsWithProjectSkills() {
-        return cvRepository.readAllByIdNotNull();
-    }
 }
