@@ -27,13 +27,16 @@ public class Cv {
 
     public void addLanguage(Language language) {
         languages.add(language);
+        language.setCv(this);
     }
 
     public void addEducation(Education education) {
         educations.add(education);
+        education.setCv(this);
     }
 
     public void addProject(Project project) {
         projects.add(project);
+        project.setCv(this);
     }
 }

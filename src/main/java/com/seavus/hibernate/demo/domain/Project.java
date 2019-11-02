@@ -1,5 +1,6 @@
 package com.seavus.hibernate.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,6 +29,7 @@ public class Project {
     )
     private Set<Skill> skills = new HashSet<>();
 
+    @JsonIgnore
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     private Cv cv;
