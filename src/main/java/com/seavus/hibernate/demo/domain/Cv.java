@@ -16,16 +16,13 @@ public class Cv {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
     public List<Language> languages = new ArrayList<>();
 
-    @JoinColumn
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
     public List<Education> educations = new ArrayList<>();
 
-    @JoinColumn
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
     public List<Project> projects = new ArrayList<>();
 
     public void addLanguage(Language language) {

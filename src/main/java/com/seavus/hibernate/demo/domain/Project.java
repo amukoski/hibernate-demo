@@ -28,6 +28,10 @@ public class Project {
     )
     private List<Skill> skills = new ArrayList<>();
 
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cv cv;
+
     public Project(String name) {
         this.name = name;
     }
