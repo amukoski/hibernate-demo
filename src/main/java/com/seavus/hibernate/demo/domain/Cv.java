@@ -2,13 +2,31 @@ package com.seavus.hibernate.demo.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@NamedEntityGraph(
+    name = "Cv.CvWithLanguagesEducationsAndProjects",
+    attributeNodes = {
+        @NamedAttributeNode("languages"),
+        @NamedAttributeNode("educations"),
+        @NamedAttributeNode("projects")
+    }
+)
+@NamedEntityGraph(
+    name = "Cv.CvWithLanguagesEducationsProjectsAndProjectSkills",
+    attributeNodes = {
+        @NamedAttributeNode("languages"),
+        @NamedAttributeNode("educations"),
+        @NamedAttributeNode(value = "projects",subgraph = "Project.ProjectWithSkills")
+    },
+    subgraphs = @NamedSubgraph(
+        name = "Project.ProjectWithSkills",
+        attributeNodes = @NamedAttributeNode("skills")
+    )
+)
 @Getter
 @Setter
 @Entity
@@ -18,17 +36,14 @@ public class Cv {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
-    public List<Language> languages = new ArrayList<>();
+    public Set<Language> languages = new HashSet<>();
 
-    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
-    public List<Education> educations = new ArrayList<>();
+    public Set<Education> educations = new HashSet<>();
 
-    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
-    public List<Project> projects = new ArrayList<>();
+    public Set<Project> projects = new HashSet<>();
 
     public void addLanguage(Language language) {
         languages.add(language);

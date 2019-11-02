@@ -16,6 +16,11 @@ public class CvController {
 
     @GetMapping
     public Iterable<Cv> findAllCvs() {
-        return cvRepository.findAll();
+        return cvRepository.findAllByIdNotNull();
+    }
+
+    @GetMapping("/full-cv")
+    public Iterable<Cv> findCvsWithProjectSkills() {
+        return cvRepository.readAllByIdNotNull();
     }
 }
