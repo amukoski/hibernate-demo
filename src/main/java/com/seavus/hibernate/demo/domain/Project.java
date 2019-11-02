@@ -20,7 +20,7 @@ public class Project {
 
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany
     @JoinTable(
         name = "projects_skills",
         joinColumns = @JoinColumn(name = "project_id"),
@@ -39,5 +39,10 @@ public class Project {
     public void addSkill(Skill skill) {
         skills.add(skill);
         skill.getProjects().add(this);
+    }
+
+    public void removeSkill(Skill skill) {
+        skills.remove(skill);
+        skill.getProjects().remove(this);
     }
 }
