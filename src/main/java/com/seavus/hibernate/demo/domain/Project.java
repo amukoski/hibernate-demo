@@ -21,7 +21,7 @@ public class Project {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "projects_skills",
         joinColumns = @JoinColumn(name = "project_id"),

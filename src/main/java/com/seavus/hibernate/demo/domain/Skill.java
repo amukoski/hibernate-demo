@@ -1,5 +1,6 @@
 package com.seavus.hibernate.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Skill {
 
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "skills")
     private Set<Project> projects = new HashSet<>();
 
