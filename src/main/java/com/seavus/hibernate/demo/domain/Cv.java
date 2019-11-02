@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,13 +17,13 @@ public class Cv {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
-    public List<Language> languages = new ArrayList<>();
+    public Set<Language> languages = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
-    public List<Education> educations = new ArrayList<>();
+    public Set<Education> educations = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cv")
-    public List<Project> projects = new ArrayList<>();
+    public Set<Project> projects = new HashSet<>();
 
     public void addLanguage(Language language) {
         languages.add(language);
